@@ -1,0 +1,5 @@
+services:
+    Sourceability\InstrumentationBundle\Profiler\ProfilerInterface:
+        class: 'Sourceability\InstrumentationBundle\Profiler\ProfilerChain'
+        arguments:
+            $profilers: !tagged_iterator 'sourceability_instrumentation.profiler'

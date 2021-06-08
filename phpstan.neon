@@ -1,0 +1,21 @@
+parameters:
+    checkMissingIterableValueType: false
+
+    inferPrivatePropertyTypeFromConstructor: true
+
+    level: max
+
+    paths:
+        - src/
+        - tests/
+
+    ignoreErrors:
+        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::#'
+        - '#[Ff]unction (dd_?trace|DDTrace\\)\S+ (is )?not found#'
+        - '#Call to.+ method .+ on an unknown class DDTrace\\.+#'
+        - '#Call to static method [^(]+\(\) on an unknown class Tideways\\Profiler.#'
+
+includes:
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon

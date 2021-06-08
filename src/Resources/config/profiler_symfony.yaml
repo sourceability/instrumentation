@@ -1,0 +1,8 @@
+services:
+    Sourceability\InstrumentationBundle\Profiler\SymfonyProfiler:
+        class: 'Sourceability\InstrumentationBundle\Profiler\SymfonyProfiler'
+        arguments:
+            - '@?profiler'
+            - '@?debug.stopwatch'
+        tags:
+            - { name: 'sourceability_instrumentation.profiler' }

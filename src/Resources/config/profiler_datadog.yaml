@@ -1,0 +1,7 @@
+services:
+    Sourceability\InstrumentationBundle\Profiler\DatadogProfiler:
+        class: 'Sourceability\InstrumentationBundle\Profiler\DatadogProfiler'
+        arguments:
+            - '@logger'
+        tags:
+            - { name: 'sourceability_instrumentation.profiler' }
