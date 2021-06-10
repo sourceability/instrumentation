@@ -1,7 +1,7 @@
 services:
-    Sourceability\InstrumentationBundle\Bundle\EventListener\CommandProfilerListener:
-        class: 'Sourceability\InstrumentationBundle\Bundle\EventListener\CommandProfilerListener'
+    Sourceability\Instrumentation\EventListener\CommandProfilerListener:
+        class: 'Sourceability\Instrumentation\EventListener\CommandProfilerListener'
         arguments:
-            - '@Sourceability\InstrumentationBundle\Profiler\ProfilerInterface'
+            - '@Sourceability\Instrumentation\Profiler\ProfilerInterface'
         tags:
             - { name: 'kernel.event_subscriber' }

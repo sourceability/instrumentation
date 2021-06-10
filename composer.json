@@ -46,12 +46,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Sourceability\\InstrumentationBundle\\": "src/"
+      "Sourceability\\Instrumentation\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Sourceability\\InstrumentationBundle\\Test\\": "tests/"
+      "Sourceability\\Instrumentation\\Test\\": "tests/"
     }
   },
   "support": {

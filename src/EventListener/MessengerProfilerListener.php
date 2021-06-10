@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sourceability\InstrumentationBundle\Bundle\EventListener;
+namespace Sourceability\Instrumentation\EventListener;
 
 use ReflectionClass;
-use Sourceability\InstrumentationBundle\Profiler\ProfilerInterface;
+use Sourceability\Instrumentation\Profiler\ProfilerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
 use Symfony\Component\Messenger\Event\WorkerMessageHandledEvent;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sourceability\InstrumentationBundle\Bundle\DependencyInjection;
+namespace Sourceability\Instrumentation\Bundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

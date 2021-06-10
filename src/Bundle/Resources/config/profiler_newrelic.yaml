@@ -1,6 +1,6 @@
 services:
-    Sourceability\InstrumentationBundle\Profiler\NewRelicProfiler:
-        class: 'Sourceability\InstrumentationBundle\Profiler\NewRelicProfiler'
+    Sourceability\Instrumentation\Profiler\NewRelicProfiler:
+        class: 'Sourceability\Instrumentation\Profiler\NewRelicProfiler'
         arguments:
             - '@Ekino\NewRelicBundle\NewRelic\NewRelicInteractorInterface'
             - '@Ekino\NewRelicBundle\NewRelic\Config'

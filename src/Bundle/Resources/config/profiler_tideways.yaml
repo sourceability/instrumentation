@@ -1,6 +1,6 @@
 services:
-    Sourceability\InstrumentationBundle\Profiler\TidewaysProfiler:
-        class: 'Sourceability\InstrumentationBundle\Profiler\TidewaysProfiler'
+    Sourceability\Instrumentation\Profiler\TidewaysProfiler:
+        class: 'Sourceability\Instrumentation\Profiler\TidewaysProfiler'
         arguments:
             - '@?profiler'
             - '@?debug.stopwatch'

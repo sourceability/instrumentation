@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sourceability\InstrumentationBundle\Profiler;
+namespace Sourceability\Instrumentation\Profiler;
 
 use Throwable;
 
