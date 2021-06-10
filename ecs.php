@@ -29,10 +29,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::PATHS, [__DIR__ . '/src', __DIR__ . '/tests']);
     $parameters->set(Option::SKIP, [
         MethodChainingIndentationFixer::class => [
-            __DIR__ . '/src/DependencyInjection/Configuration.php',
+            __DIR__ . '/src/Bundle/DependencyInjection/Configuration.php',
         ],
         MethodChainingNewlineFixer::class => [
-            __DIR__ . '/src/DependencyInjection/Configuration.php',
+            __DIR__ . '/src/Bundle/DependencyInjection/Configuration.php',
         ],
         YodaStyleFixer::class => [
             __DIR__,
