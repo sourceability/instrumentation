@@ -1,5 +1,5 @@
 {
-  "name": "sourceability/instrumentation-bundle",
+  "name": "sourceability/instrumentation",
   "type": "library",
   "description": "Instrument commands/workers/custom code with datadog, newrelic, tideways, symfony.",
   "homepage": "https://github.com/sourceability/instrumentation-bundle",
@@ -11,8 +11,7 @@
     }
   ],
   "require": {
-    "php": "^7.4 || ^8.0",
-    "symfony/framework-bundle": "^4.4 || ^5.0"
+    "php": "^7.4 || ^8.0"
   },
   "require-dev": {
     "datadog/dd-trace": "^0.60.0",
@@ -21,9 +20,25 @@
     "phpstan/phpstan-deprecation-rules": "^0.12.6",
     "phpstan/phpstan-strict-rules": "^0.12.9",
     "phpunit/phpunit": "^8.0 || ^9.0",
-    "symfony/stopwatch": "^4.4 || ^5.0",
+    "symfony/config": "^4.4 || ^5.0",
+    "symfony/console": "^4.4 || ^5.0",
+    "symfony/dependency-injection": "^4.4 || ^5.0",
+    "symfony/event-dispatcher": "^4.4 || ^5.0",
+    "symfony/http-foundation": "^4.4 || ^5.0",
+    "symfony/http-kernel": "^4.4 || ^5.0",
     "symfony/messenger": "^4.4 || ^5.0",
+    "symfony/stopwatch": "^4.4 || ^5.0",
     "symplify/easy-coding-standard": "^9.3"
+  },
+  "suggest": {
+    "symfony/config": "^4.4 || ^5.0",
+    "symfony/console": "^4.4 || ^5.0",
+    "symfony/dependency-injection": "^4.4 || ^5.0",
+    "symfony/event-dispatcher": "^4.4 || ^5.0",
+    "symfony/http-foundation": "^4.4 || ^5.0",
+    "symfony/http-kernel": "^4.4 || ^5.0",
+    "symfony/messenger": "^4.4 || ^5.0",
+    "symfony/stopwatch": "^4.4 || ^5.0"
   },
   "config": {
     "preferred-install": "dist",
@@ -31,12 +46,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Sourceability\\InstrumentationBundle\\": "src/"
+      "Sourceability\\Instrumentation\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Sourceability\\InstrumentationBundle\\Test\\": "tests/"
+      "Sourceability\\Instrumentation\\Test\\": "tests/"
     }
   },
   "support": {

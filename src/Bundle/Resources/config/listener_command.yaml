@@ -1,0 +1,7 @@
+services:
+    Sourceability\Instrumentation\EventListener\CommandProfilerListener:
+        class: 'Sourceability\Instrumentation\EventListener\CommandProfilerListener'
+        arguments:
+            - '@Sourceability\Instrumentation\Profiler\ProfilerInterface'
+        tags:
+            - { name: 'kernel.event_subscriber' }

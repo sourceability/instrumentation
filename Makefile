@@ -37,7 +37,7 @@ phpstan: ## Static analysis
 cs: ## Coding standards check
 	$(EXEC_PHP) ecs check
 
-.PHONY: cs
+.PHONY: cs-fix
 cs-fix: ## Coding standards fix
 	$(EXEC_PHP) ecs check --fix
 

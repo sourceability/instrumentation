@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sourceability\InstrumentationBundle\DependencyInjection;
+namespace Sourceability\Instrumentation\Bundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -37,7 +37,8 @@ CODE_SAMPLE
                         ->end()
                         ->arrayNode('datadog')
                             ->canBeEnabled()
-                            ->info(<<<'CODE_SAMPLE'
+                            ->info(
+                                <<<'CODE_SAMPLE'
 See https://docs.datadoghq.com/tracing/setup_overview/setup/php/
 CODE_SAMPLE
                             )

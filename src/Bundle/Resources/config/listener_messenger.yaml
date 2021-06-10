@@ -1,0 +1,7 @@
+services:
+    Sourceability\Instrumentation\EventListener\MessengerProfilerListener:
+        class: 'Sourceability\Instrumentation\EventListener\MessengerProfilerListener'
+        arguments:
+            - '@Sourceability\Instrumentation\Profiler\ProfilerInterface'
+        tags:
+            - { name: 'kernel.event_subscriber' }

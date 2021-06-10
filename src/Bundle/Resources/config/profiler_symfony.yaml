@@ -1,6 +1,6 @@
 services:
-    Sourceability\InstrumentationBundle\Profiler\SymfonyProfiler:
-        class: 'Sourceability\InstrumentationBundle\Profiler\SymfonyProfiler'
+    Sourceability\Instrumentation\Profiler\SymfonyProfiler:
+        class: 'Sourceability\Instrumentation\Profiler\SymfonyProfiler'
         arguments:
             - '@?profiler'
             - '@?debug.stopwatch'
