@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Sourceability\Instrumentation\EventListener;
 
-use ReflectionClass;
 use Sourceability\Instrumentation\Profiler\ProfilerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
@@ -33,7 +32,7 @@ class MessengerProfilerListener implements EventSubscriberInterface
 
     public function onInvoke(WorkerMessageReceivedEvent $event): void
     {
-        $transactionName = (new ReflectionClass($event->getEnvelope()->getMessage()))->getShortName();
+        $transactionName = \get_class($event->getEnvelope()->getMessage());
 
         $this->profiler->stop();
         $this->profiler->start($transactionName, 'messenger');
