@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sourceability\InstrumentationBundle\EventListener;
+namespace Sourceability\InstrumentationBundle\Bundle\EventListener;
 
 use Sourceability\InstrumentationBundle\Profiler\ProfilerInterface;
 use Symfony\Component\Console\ConsoleEvents;

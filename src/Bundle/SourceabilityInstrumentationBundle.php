@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sourceability\InstrumentationBundle;
+namespace Sourceability\InstrumentationBundle\Bundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
