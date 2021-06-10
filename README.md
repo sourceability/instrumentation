@@ -1,9 +1,25 @@
-# sourceability/instrumentation-bundle
+# sourceability/instrumentation
 
-This bundle provides a simple interface to start and stop instrumenting code with APMs.
+This library provides a simple interface to start and stop instrumenting code with APMs.
 
-Symfony commands and messenger workers have built in integrations, which is convenient because most
+Symfony commands and messenger workers have built in symfony event listeners which is convenient because most
 APMs usually don't support profiling workers out of the box.
+
+Install the library using composer:
+```
+$ composer require sourceability/instrumentation
+```
+
+## Bundle
+
+This library includes an optional Symfony bundle that you can install by updating `config/bundles.php`:
+```
+return [
+    Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
+    // ...
+    Sourceability\Instrumentation\Bundle\SourceabilityInstrumentationBundle::class => ['all' => true],
+];
+```
 
 Bundle configuration reference:
 ```yaml
@@ -46,7 +62,7 @@ sourceability_instrumentation:
 
 namespace App\Command;
 
-use Sourceability\InstrumentationBundle\Profiler\ProfilerInterface;
+use Sourceability\Instrumentation\Profiler\ProfilerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

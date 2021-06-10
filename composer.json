@@ -2,7 +2,7 @@
   "name": "sourceability/instrumentation",
   "type": "library",
   "description": "Instrument commands/workers/custom code with datadog, newrelic, tideways, symfony.",
-  "homepage": "https://github.com/sourceability/instrumentation-bundle",
+  "homepage": "https://github.com/sourceability/instrumentation",
   "license": "MIT",
   "authors": [
     {
@@ -55,7 +55,7 @@
     }
   },
   "support": {
-    "issues": "https://github.com/sourceability/instrumentation-bundle/issues",
-    "source": "https://github.com/sourceability/instrumentation-bundle"
+    "issues": "https://github.com/sourceability/instrumentation/issues",
+    "source": "https://github.com/sourceability/instrumentation"
   }
 }
