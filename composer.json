@@ -1,5 +1,5 @@
 {
-  "name": "sourceability/instrumentation-bundle",
+  "name": "sourceability/instrumentation",
   "type": "library",
   "description": "Instrument commands/workers/custom code with datadog, newrelic, tideways, symfony.",
   "homepage": "https://github.com/sourceability/instrumentation-bundle",
