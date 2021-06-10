@@ -39,5 +39,9 @@ class SourceabilityInstrumentationExtension extends ConfigurableExtension
         if ($config['profilers']['tideways']['enabled']) {
             $loader->load('profiler_tideways.yaml');
         }
+
+        if (interface_exists('Symfony\\Component\\Messenger\\Middleware\\MiddlewareInterface')) {
+            $loader->load('messenger_middleware.yaml');
+        }
     }
 }

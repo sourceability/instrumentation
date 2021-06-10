@@ -1,0 +1,6 @@
+services:
+    Sourceability\Instrumentation\Messenger\ProfilerMiddleware:
+        class: 'Sourceability\Instrumentation\Messenger\ProfilerMiddleware'
+        arguments:
+            - '@Sourceability\Instrumentation\Profiler\ProfilerInterface'
+            - '@?request_stack'
