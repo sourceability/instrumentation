@@ -57,5 +57,10 @@
   "support": {
     "issues": "https://github.com/sourceability/instrumentation/issues",
     "source": "https://github.com/sourceability/instrumentation"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-main": "0.2.x-dev"
+    }
   }
 }
