@@ -4,5 +4,6 @@ services:
         arguments:
             - '@?profiler'
             - '@?debug.stopwatch'
+            - '@?request_stack'
         tags:
             - { name: 'sourceability_instrumentation.profiler' }

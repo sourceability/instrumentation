@@ -7,6 +7,7 @@ namespace Sourceability\Instrumentation\Profiler;
 use function microtime;
 use function sprintf;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -19,14 +20,17 @@ class SymfonyProfiler implements ProfilerInterface
 
     private ?Stopwatch $stopwatch;
 
+    private ?RequestStack $requestStack;
+
     private ?StopwatchEvent $mainEvent = null;
 
     private ?Request $request = null;
 
-    public function __construct(?Profiler $profiler, ?Stopwatch $stopwatch)
+    public function __construct(?Profiler $profiler, ?Stopwatch $stopwatch, ?RequestStack $requestStack)
     {
         $this->profiler = $profiler;
         $this->stopwatch = $stopwatch;
+        $this->requestStack = $requestStack;
     }
 
     public function start(string $name, ?string $kind = null): void
@@ -68,17 +72,33 @@ class SymfonyProfiler implements ProfilerInterface
 
         $response = new Response('', $responseStatus);
 
+        $requestStackToCleanUp = null;
+        if (null !== $this->requestStack
+            && null === $this->requestStack->getMainRequest()
+        ) {
+            // Fixes: Notice: Trying to get property 'attributes' of non-object
+            // See https://github.com/symfony/symfony/blob/e34cd7dd2c6d0b30d24cad443b8f964daa841d71/src/Symfony/Component/HttpKernel/DataCollector/RequestDataCollector.php#L109
+
+            $this->requestStack->push($this->request);
+            $requestStackToCleanUp = $this->requestStack;
+        }
+
         $profile = $this->profiler->collect($this->request, $response, $exception);
 
-        if (null === $profile) {
-            return;
+        if (null !== $profile) {
+            if ($this->stopwatch->isStarted('__section__')) {
+                $this->stopwatch->stopSection($profile->getToken());
+            }
+
+            $this->profiler->saveProfile($profile);
         }
 
-        if ($this->stopwatch->isStarted('__section__')) {
-            $this->stopwatch->stopSection($profile->getToken());
-        }
+        if (null !== $requestStackToCleanUp) {
+            $poppedRequest = $requestStackToCleanUp->pop();
 
-        $this->profiler->saveProfile($profile);
+            \assert($this->request === $poppedRequest);
+        }
+        $this->request = null;
     }
 
     public function stopAndIgnore(): void
