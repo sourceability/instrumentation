@@ -41,5 +41,9 @@ cs: ## Coding standards check
 cs-fix: ## Coding standards fix
 	$(EXEC_PHP) ecs check --fix
 
+.PHONY: phpunit
+phpunit: ## Unit tests
+	$(EXEC_PHP) phpunit
+
 .PHONY: all
-all: phpstan yamllint cs ## Runs all test/lint targets
+all: phpstan yamllint cs phpunit ## Runs all test/lint targets

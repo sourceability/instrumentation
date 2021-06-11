@@ -17,6 +17,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('profilers')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('tideways')
                             ->canBeEnabled()
@@ -55,6 +56,7 @@ CODE_SAMPLE
                     ->end()
                 ->end()
                 ->arrayNode('listeners')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('command')
                             ->canBeEnabled()
