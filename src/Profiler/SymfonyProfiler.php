@@ -74,7 +74,7 @@ class SymfonyProfiler implements ProfilerInterface
 
         $requestStackToCleanUp = null;
         if (null !== $this->requestStack
-            && null === $this->requestStack->getMainRequest()
+            && null === $this->requestStack->getMasterRequest()
         ) {
             // Fixes: Notice: Trying to get property 'attributes' of non-object
             // See https://github.com/symfony/symfony/blob/e34cd7dd2c6d0b30d24cad443b8f964daa841d71/src/Symfony/Component/HttpKernel/DataCollector/RequestDataCollector.php#L109

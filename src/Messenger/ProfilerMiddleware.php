@@ -28,7 +28,7 @@ class ProfilerMiddleware implements MiddlewareInterface
         $transactionName = \get_class($envelope->getMessage());
 
         if (null !== $this->requestStack
-            && null !== $this->requestStack->getMainRequest()
+            && null !== $this->requestStack->getMasterRequest()
         ) {
             // Do not profile if we are within a web context
             return $stack->next()
