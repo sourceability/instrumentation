@@ -16,6 +16,8 @@
   "require-dev": {
     "datadog/dd-trace": "^0.60.0",
     "ekino/newrelic-bundle": "^2.2",
+    "jangregor/phpstan-prophecy": "^0.8.1",
+    "phpspec/prophecy-phpunit": "^2.0",
     "phpstan/phpstan": "^0.12.85",
     "phpstan/phpstan-deprecation-rules": "^0.12.6",
     "phpstan/phpstan-strict-rules": "^0.12.9",
