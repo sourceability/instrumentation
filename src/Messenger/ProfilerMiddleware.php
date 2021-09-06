@@ -43,7 +43,10 @@ class ProfilerMiddleware implements MiddlewareInterface
                 ->handle($envelope, $stack)
             ;
         } catch (HandlerFailedException $exception) {
-            $this->profiler->stop($exception);
+            $nestedExceptions = $exception->getNestedExceptions();
+            $firstNestedException = reset($nestedExceptions);
+
+            $this->profiler->stop(false !== $firstNestedException ? $firstNestedException : $exception);
 
             throw $exception;
         } finally {

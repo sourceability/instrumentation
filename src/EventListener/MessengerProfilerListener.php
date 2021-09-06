@@ -10,6 +10,7 @@ use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
 use Symfony\Component\Messenger\Event\WorkerMessageHandledEvent;
 use Symfony\Component\Messenger\Event\WorkerMessageReceivedEvent;
 use Symfony\Component\Messenger\Event\WorkerStartedEvent;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 class MessengerProfilerListener implements EventSubscriberInterface
 {
@@ -45,7 +46,16 @@ class MessengerProfilerListener implements EventSubscriberInterface
 
     public function onReject(WorkerMessageFailedEvent $event): void
     {
-        $this->profiler->stop($event->getThrowable());
+        $throwable = $event->getThrowable();
+
+        if ($throwable instanceof HandlerFailedException) {
+            $nestedExceptions = $throwable->getNestedExceptions();
+            $firstNestedException = reset($nestedExceptions);
+
+            $throwable = false !== $firstNestedException ? $firstNestedException : $throwable;
+        }
+
+        $this->profiler->stop($throwable);
     }
 
     public function onPing(WorkerStartedEvent $event): void
