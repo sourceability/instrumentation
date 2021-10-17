@@ -1,0 +1,5 @@
+services:
+    Sourceability\Instrumentation\Profiler\SpxProfiler:
+        class: 'Sourceability\Instrumentation\Profiler\SpxProfiler'
+        tags:
+            - { name: 'sourceability_instrumentation.profiler' }

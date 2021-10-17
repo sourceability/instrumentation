@@ -53,6 +53,14 @@ This is really useful for development along with https://github.com/sourceabilit
 CODE_SAMPLE
                             )
                         ->end()
+                        ->arrayNode('spx')
+                            ->canBeEnabled()
+                            ->info(
+                                <<<'CODE_SAMPLE'
+See https://github.com/NoiseByNorthwest/php-spx
+CODE_SAMPLE
+                            )
+                        ->end()
                     ->end()
                 ->end()
                 ->arrayNode('listeners')

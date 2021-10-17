@@ -44,6 +44,10 @@ sourceability_instrumentation:
         # This is really useful for development along with https://github.com/sourceability/console-toolbar-bundle
         symfony:
             enabled:              false
+
+        # See https://github.com/NoiseByNorthwest/php-spx
+        spx:
+            enabled:              false
     listeners:
 
         # Automatically instrument commands

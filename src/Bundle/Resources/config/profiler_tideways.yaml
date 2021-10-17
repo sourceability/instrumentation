@@ -1,8 +1,5 @@
 services:
     Sourceability\Instrumentation\Profiler\TidewaysProfiler:
         class: 'Sourceability\Instrumentation\Profiler\TidewaysProfiler'
-        arguments:
-            - '@?profiler'
-            - '@?debug.stopwatch'
         tags:
             - { name: 'sourceability_instrumentation.profiler' }
