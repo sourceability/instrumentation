@@ -59,6 +59,16 @@ sourceability_instrumentation:
             enabled:              false
 ```
 
+Messenger profiling is also available with a middleware:
+```yaml
+framework:
+    messenger:
+        buses:
+            messenger.bus.default:
+                middleware:
+                    - Sourceability\Instrumentation\Messenger\ProfilerMiddleware
+```
+
 ## Instrumenting a long running command
 
 ```php
