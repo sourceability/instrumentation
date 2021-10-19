@@ -17,6 +17,8 @@ class ProfilerMiddleware implements MiddlewareInterface
 
     private ?RequestStack $requestStack;
 
+    private bool $started = false;
+
     public function __construct(ProfilerInterface $profiler, ?RequestStack $requestStack)
     {
         $this->profiler = $profiler;
@@ -33,24 +35,38 @@ class ProfilerMiddleware implements MiddlewareInterface
             // Do not profile if we are within a web context
             return $stack->next()
                 ->handle($envelope, $stack)
-            ;
+                ;
         }
 
-        $this->profiler->start($transactionName, 'messenger');
+        $shouldStop = false;
+        if (!$this->started) {
+            $this->profiler->start($transactionName, 'messenger');
+
+            $this->started = true;
+            $shouldStop = true;
+        }
 
         try {
             return $stack->next()
                 ->handle($envelope, $stack)
             ;
         } catch (HandlerFailedException $exception) {
-            $nestedExceptions = $exception->getNestedExceptions();
-            $firstNestedException = reset($nestedExceptions);
+            if ($shouldStop) {
+                $nestedExceptions = $exception->getNestedExceptions();
+                $firstNestedException = reset($nestedExceptions);
 
-            $this->profiler->stop(false !== $firstNestedException ? $firstNestedException : $exception);
+                $this->profiler->stop(false !== $firstNestedException ? $firstNestedException : $exception);
+                $this->started = false;
+
+                $shouldStop = false;
+            }
 
             throw $exception;
         } finally {
-            $this->profiler->stop();
+            if ($shouldStop) {
+                $this->profiler->stop();
+                $this->started = false;
+            }
         }
     }
 }

@@ -14,9 +14,13 @@ parameters:
         - '#[Ff]unction (dd_?trace|DDTrace\\)\S+ (is )?not found#'
         - '#Call to.+ method .+ on an unknown class DDTrace\\.+#'
         - '#Call to static method [^(]+\(\) on an unknown class Tideways\\Profiler.#'
+        - '#Call to deprecated method getMasterRequest\(\) of class Symfony\\Component\\HttpFoundation\\RequestStack#'
+        - '#Function spx_profiler_\S+ not found#'
 
 includes:
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
     - vendor/phpstan/phpstan/conf/bleedingEdge.neon
     - vendor/jangregor/phpstan-prophecy/extension.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
