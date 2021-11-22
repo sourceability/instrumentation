@@ -10,6 +10,7 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface;
+use Symfony\Component\Messenger\Stamp\ReceivedStamp;
 
 class ProfilerMiddleware implements MiddlewareInterface
 {
@@ -29,9 +30,17 @@ class ProfilerMiddleware implements MiddlewareInterface
     {
         $transactionName = \get_class($envelope->getMessage());
 
+        $skip = false;
         if (null !== $this->requestStack
             && null !== $this->requestStack->getMasterRequest()
         ) {
+            $skip = true;
+        }
+        if (null === $envelope->last(ReceivedStamp::class)) {
+            $skip = true;
+        }
+
+        if ($skip) {
             // Do not profile if we are within a web context
             return $stack->next()
                 ->handle($envelope, $stack)
