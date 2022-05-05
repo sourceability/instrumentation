@@ -59,7 +59,11 @@ sourceability_instrumentation:
             enabled:              false
 ```
 
-Messenger profiling is also available with a middleware:
+Messenger profiling is also available with a middleware. 
+
+Please note that you should use either the middleware, or the listener, but not both, 
+as this will distort the statistics sent to your APM/monitoring.
+
 ```yaml
 framework:
     messenger:
