@@ -24,10 +24,10 @@ class MessengerProfilerListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            WorkerMessageReceivedEvent::class => 'onInvoke',
-            WorkerMessageHandledEvent::class => 'onAcknowledge',
-            WorkerMessageFailedEvent::class => 'onReject',
-            WorkerStartedEvent::class => 'onPing',
+            WorkerMessageReceivedEvent::class => [['onInvoke', 2048]],
+            WorkerMessageHandledEvent::class => [['onAcknowledge', -2048]],
+            WorkerMessageFailedEvent::class => [['onReject', -2048]],
+            WorkerStartedEvent::class => [['onPing', -2048]],
         ];
     }
 
