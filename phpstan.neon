@@ -14,7 +14,6 @@ parameters:
         - '#[Ff]unction (dd_?trace|DDTrace\\)\S+ (is )?not found#'
         - '#Call to.+ method .+ on an unknown class DDTrace\\.+#'
         - '#Call to static method [^(]+\(\) on an unknown class Tideways\\Profiler.#'
-        - '#Call to deprecated method getMasterRequest\(\) of class Symfony\\Component\\HttpFoundation\\RequestStack#'
         - '#Function spx_profiler_\S+ not found#'
 
 includes:
