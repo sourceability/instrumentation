@@ -32,12 +32,14 @@ jobs:
                 with:
                     php-version: ${{ matrix.php_version }}
                     coverage: none
+                    extensions: DataDog/dd-trace-php
 
             # See https://github.com/actions/cache/blob/main/examples.md#php---composer
             -   name: Get Composer Cache Directory
                 id: composer-cache
                 run: |
                     echo "::set-output name=dir::$(composer config cache-files-dir)"
+
             -   uses: actions/cache@v2
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
