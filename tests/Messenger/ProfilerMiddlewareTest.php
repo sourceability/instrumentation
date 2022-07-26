@@ -10,6 +10,7 @@ use Sourceability\Instrumentation\Profiler\ProfilerInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface;
+use Symfony\Component\Messenger\Stamp\ReceivedStamp;
 
 /**
  * @covers ProfilerMiddleware
@@ -29,7 +30,7 @@ class ProfilerMiddlewareTest extends TestCase
 
         $middleware = new ProfilerMiddleware($profiler->reveal(), null);
 
-        $envelope = new Envelope(new \stdClass());
+        $envelope = new Envelope(new \stdClass(), [new ReceivedStamp('foo')]);
 
         $nestedStack = $this->prophesize(StackInterface::class);
         $nestedStack->next()->willReturn(new class() implements MiddlewareInterface {

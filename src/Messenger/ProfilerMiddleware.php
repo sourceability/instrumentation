@@ -32,7 +32,7 @@ class ProfilerMiddleware implements MiddlewareInterface
 
         $skip = false;
         if (null !== $this->requestStack
-            && null !== $this->requestStack->getMasterRequest()
+            && null !== $this->requestStack->getMainRequest()
         ) {
             $skip = true;
         }
