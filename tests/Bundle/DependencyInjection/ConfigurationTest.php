@@ -9,9 +9,8 @@ use Sourceability\Instrumentation\Bundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * @covers \Sourceability\Instrumentation\Bundle\DependencyInjection\Configuration
- *
  * @internal
+ * @coversNothing
  */
 final class ConfigurationTest extends TestCase
 {

@@ -13,9 +13,8 @@ use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 /**
- * @covers \Sourceability\Instrumentation\EventListener\MessengerProfilerListener
- *
  * @internal
+ * @coversNothing
  */
 final class MessengerProfilerListenerTest extends TestCase
 {
