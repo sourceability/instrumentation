@@ -20,7 +20,9 @@ jobs:
                     - '4.4'
                     - '5.4'
                     - '6.0'
-                    - '6.1'
+                include:
+                    - php_version: '8.1'
+                      symfony_version: '6.1'
 
         name: 'PHP ${{ matrix.php_version }} - Symfony ${{ matrix.symfony_version }}'
 
