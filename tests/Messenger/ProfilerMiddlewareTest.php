@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sourceability\Instrumentation\Test\Messenger;
 
 use PHPUnit\Framework\TestCase;
@@ -13,9 +15,10 @@ use Symfony\Component\Messenger\Middleware\StackInterface;
 use Symfony\Component\Messenger\Stamp\ReceivedStamp;
 
 /**
- * @covers ProfilerMiddleware
+ * @internal
+ * @coversNothing
  */
-class ProfilerMiddlewareTest extends TestCase
+final class ProfilerMiddlewareTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -33,37 +36,39 @@ class ProfilerMiddlewareTest extends TestCase
         $envelope = new Envelope(new \stdClass(), [new ReceivedStamp('foo')]);
 
         $nestedStack = $this->prophesize(StackInterface::class);
-        $nestedStack->next()->willReturn(new class() implements MiddlewareInterface {
-            public function handle(Envelope $envelope, StackInterface $stack): Envelope
-            {
-                // noop
-                return $envelope;
-            }
-        });
+        $nestedStack->next()
+            ->willReturn(new class() implements MiddlewareInterface {
+                public function handle(Envelope $envelope, StackInterface $stack): Envelope
+                {
+                    // noop
+                    return $envelope;
+                }
+            })
+        ;
 
         $stack = $this->prophesize(StackInterface::class);
-        $stack->next()->willReturn(new class($middleware, $nestedStack->reveal()) implements MiddlewareInterface {
-            private ProfilerMiddleware $middleware;
-            private StackInterface $stack;
+        $stack->next()
+            ->willReturn(new class($middleware, $nestedStack->reveal()) implements MiddlewareInterface {
+                private ProfilerMiddleware $middleware;
 
-            public function __construct(ProfilerMiddleware $middleware, StackInterface $stack)
-            {
-                $this->middleware = $middleware;
-                $this->stack = $stack;
-            }
+                private StackInterface $stack;
 
-            public function handle(Envelope $envelope, StackInterface $stack): Envelope
-            {
-                // this might be our handler, that ends up having other handlers involved
-                // ... triggering a nested \Sourceability\Instrumentation\Messenger\ProfilerMiddleware::handle
+                public function __construct(ProfilerMiddleware $middleware, StackInterface $stack)
+                {
+                    $this->middleware = $middleware;
+                    $this->stack = $stack;
+                }
 
-                return $this->middleware->handle($envelope, $this->stack);
-            }
-        });
+                public function handle(Envelope $envelope, StackInterface $stack): Envelope
+                {
+                    // this might be our handler, that ends up having other handlers involved
+                    // ... triggering a nested \Sourceability\Instrumentation\Messenger\ProfilerMiddleware::handle
 
-        $middleware->handle(
-            $envelope,
-            $stack->reveal()
-        );
+                    return $this->middleware->handle($envelope, $this->stack);
+                }
+            })
+        ;
+
+        $middleware->handle($envelope, $stack->reveal());
     }
 }

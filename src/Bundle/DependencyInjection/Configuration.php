@@ -55,8 +55,7 @@ CODE_SAMPLE
                         ->end()
                         ->arrayNode('spx')
                             ->canBeEnabled()
-                            ->info(
-                                <<<'CODE_SAMPLE'
+                            ->info(<<<'CODE_SAMPLE'
 See https://github.com/NoiseByNorthwest/php-spx
 CODE_SAMPLE
                             )
