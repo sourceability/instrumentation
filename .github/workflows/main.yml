@@ -20,7 +20,9 @@ jobs:
                     - '4.4'
                     - '5.4'
                     - '6.0'
-                    - '6.1'
+                include:
+                    - php_version: '8.1'
+                      symfony_version: '6.1'
 
         name: 'PHP ${{ matrix.php_version }} - Symfony ${{ matrix.symfony_version }}'
 
@@ -44,6 +46,11 @@ jobs:
                     key: ${{ runner.os }}-php${{ matrix.php_version }}-symfony${{ matrix.symfony_version }}-composer-${{ hashFiles('**/composer.json') }}
                     restore-keys: |
                         ${{ runner.os }}-composer-
+
+            -   name: "Install symfony/flex for SYMFONY_REQUIRE"
+                run: |
+                     composer global config --no-plugins allow-plugins.symfony/flex true
+                     composer global require --no-progress --no-scripts --no-plugins symfony/flex
 
             -   name: 'Install dependencies'
                 run: SYMFONY_REQUIRE='${{ matrix.symfony_version }}.*' composer update ${{ matrix.composer-flags }} --prefer-dist
