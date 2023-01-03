@@ -13,7 +13,7 @@ use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 /**
- * @covers \MessengerProfilerListener
+ * @covers \Sourceability\Instrumentation\EventListener\MessengerProfilerListener
  *
  * @internal
  */
@@ -33,7 +33,7 @@ final class MessengerProfilerListenerTest extends TestCase
             ->shouldBeCalled()
         ;
 
-        $event = new WorkerMessageFailedEvent(new Envelope(new \StdClass()), 'receiver', $error);
+        $event = new WorkerMessageFailedEvent(new Envelope(new \stdClass()), 'receiver', $error);
         $listener->onReject($event);
     }
 
@@ -43,7 +43,7 @@ final class MessengerProfilerListenerTest extends TestCase
 
         $listener = new MessengerProfilerListener($profiler->reveal());
 
-        $envelope = new Envelope(new \StdClass());
+        $envelope = new Envelope(new \stdClass());
 
         $error = new HandlerFailedException($envelope, [$handlerError = new \Exception('not good')]);
 

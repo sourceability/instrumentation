@@ -9,7 +9,7 @@ use Sourceability\Instrumentation\Bundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * @covers \Configuration
+ * @covers \Sourceability\Instrumentation\Bundle\DependencyInjection\Configuration
  *
  * @internal
  */

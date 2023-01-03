@@ -13,7 +13,7 @@ use Symfony\Component\Messenger\Middleware\StackInterface;
 use Symfony\Component\Messenger\Stamp\ReceivedStamp;
 
 /**
- * @covers ProfilerMiddleware
+ * @covers \Sourceability\Instrumentation\Messenger\ProfilerMiddleware
  */
 class ProfilerMiddlewareTest extends TestCase
 {
