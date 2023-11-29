@@ -21,7 +21,8 @@ class DatadogProfiler implements ProfilerInterface
     private ?Scope $scope = null;
 
     private LoggerInterface $logger;
-    private ?float $sampleRate;
+
+    private float $sampleRate = 1.0;
 
     public function __construct(LoggerInterface $logger)
     {
@@ -31,8 +32,6 @@ class DatadogProfiler implements ProfilerInterface
         if(is_numeric($sampleRateString)) {
             $sampleRate = floatval($sampleRateString);
             $this->sampleRate = $sampleRate;
-        } else {
-            $this->sampleRate = null;
         }
     }
 
@@ -104,11 +103,8 @@ class DatadogProfiler implements ProfilerInterface
 
     private function rateLimited(): bool
     {
-        if($this->sampleRate) {
-            $randomFloat = mt_rand() / mt_getrandmax(); // between 0 and 1
-            return $randomFloat > $this->sampleRate;
-        }  
-        return false;
+        $randomFloat = mt_rand() / mt_getrandmax(); // between 0 and 1
+        return $randomFloat > $this->sampleRate;
     }
 
     private function isEnabled(): bool
