@@ -22,14 +22,26 @@ class DatadogProfiler implements ProfilerInterface
 
     private LoggerInterface $logger;
 
+    private float $sampleRate = 1.0;
+
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
+
+        $sampleRateString = getenv('DD_TRACE_SAMPLE_RATE');
+        if(is_numeric($sampleRateString)) {
+            $sampleRate = floatval($sampleRateString);
+            $this->sampleRate = $sampleRate;
+        }
     }
 
     public function start(string $name, ?string $kind = null): void
     {
         if (!$this->isEnabled()) {
+            return;
+        }
+
+        if($this->rateLimited()) {
             return;
         }
 
@@ -87,6 +99,12 @@ class DatadogProfiler implements ProfilerInterface
         }
 
         GlobalTracer::set(new Tracer());
+    }
+
+    private function rateLimited(): bool
+    {
+        $randomFloat = mt_rand() / mt_getrandmax(); // between 0 and 1
+        return $randomFloat > $this->sampleRate;
     }
 
     private function isEnabled(): bool
