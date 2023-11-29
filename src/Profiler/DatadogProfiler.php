@@ -29,8 +29,8 @@ class DatadogProfiler implements ProfilerInterface
         $this->logger = $logger;
 
         $sampleRateString = getenv('DD_TRACE_SAMPLE_RATE');
-        if(is_numeric($sampleRateString)) {
-            $sampleRate = floatval($sampleRateString);
+        if (is_numeric($sampleRateString)) {
+            $sampleRate = (float) $sampleRateString;
             $this->sampleRate = $sampleRate;
         }
     }
@@ -41,7 +41,7 @@ class DatadogProfiler implements ProfilerInterface
             return;
         }
 
-        if($this->rateLimited()) {
+        if ($this->rateLimited()) {
             return;
         }
 
@@ -104,6 +104,7 @@ class DatadogProfiler implements ProfilerInterface
     private function rateLimited(): bool
     {
         $randomFloat = mt_rand() / mt_getrandmax(); // between 0 and 1
+
         return $randomFloat > $this->sampleRate;
     }
 
