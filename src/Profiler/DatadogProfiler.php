@@ -8,7 +8,6 @@ use function dd_trace_env_config;
 use DDTrace\Contracts\Scope;
 use DDTrace\GlobalTracer;
 use DDTrace\Tag;
-use DDTrace\Tracer;
 use DDTrace\Type;
 use function ddtrace_config_app_name;
 use function ddtrace_config_trace_enabled;
@@ -22,26 +21,14 @@ class DatadogProfiler implements ProfilerInterface
 
     private LoggerInterface $logger;
 
-    private float $sampleRate = 1.0;
-
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
-
-        $sampleRateString = getenv('DD_TRACE_SAMPLE_RATE');
-        if (is_numeric($sampleRateString)) {
-            $sampleRate = (float) $sampleRateString;
-            $this->sampleRate = $sampleRate;
-        }
     }
 
     public function start(string $name, ?string $kind = null): void
     {
         if (!$this->isEnabled()) {
-            return;
-        }
-
-        if ($this->rateLimited()) {
             return;
         }
 
@@ -98,14 +85,7 @@ class DatadogProfiler implements ProfilerInterface
             return;
         }
 
-        GlobalTracer::set(new Tracer());
-    }
-
-    private function rateLimited(): bool
-    {
-        $randomFloat = mt_rand() / mt_getrandmax(); // between 0 and 1
-
-        return $randomFloat > $this->sampleRate;
+        GlobalTracer::get()->reset();
     }
 
     private function isEnabled(): bool
