@@ -8,6 +8,7 @@ use function dd_trace_env_config;
 use DDTrace\Contracts\Scope;
 use DDTrace\GlobalTracer;
 use DDTrace\Tag;
+use DDTrace\Tracer;
 use DDTrace\Type;
 use function ddtrace_config_app_name;
 use function ddtrace_config_trace_enabled;
@@ -85,7 +86,13 @@ class DatadogProfiler implements ProfilerInterface
             return;
         }
 
-        GlobalTracer::get()->reset();
+        $this->scope = null;
+
+        // https://github.com/DataDog/dd-trace-php/issues/1533#issuecomment-1059211743
+        ini_set('datadog.trace.enabled', '0');
+        ini_set('datadog.trace.enabled', '1');
+
+        GlobalTracer::set(new Tracer());
     }
 
     private function isEnabled(): bool
