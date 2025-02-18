@@ -34,7 +34,7 @@ class MessengerProfilerListener implements EventSubscriberInterface
 
     public function onInvoke(WorkerMessageReceivedEvent $event): void
     {
-        $transactionName = \get_class($event->getEnvelope()->getMessage());
+        $transactionName = str_replace('\\', '/', \get_class($event->getEnvelope()->getMessage()));
 
         $this->profiler->stop();
         $this->profiler->start($transactionName, 'messenger');
