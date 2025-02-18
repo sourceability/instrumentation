@@ -29,7 +29,7 @@ class ProfilerMiddleware implements MiddlewareInterface
 
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
-        $transactionName = \get_class($envelope->getMessage());
+        $transactionName = str_replace('\\', '/', \get_class($envelope->getMessage()));
 
         $skip = false;
         if (null !== $this->requestStack

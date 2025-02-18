@@ -45,6 +45,7 @@ class SymfonyProfiler implements ProfilerInterface
             $kind = 'custom';
         }
 
+        $name = str_replace('\\', '/', $name);
         $uri = sprintf('http://%s/%s', $kind, $name);
 
         $this->request = Request::create($uri, $kind);
